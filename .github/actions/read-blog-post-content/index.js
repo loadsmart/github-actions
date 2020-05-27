@@ -43,7 +43,6 @@ async function run() {
 
     console.log("properties: ", properties);
 
-    var metadata = {};
     const metadata = properties.reduce((acc, property) => {
       console.info("prop: ", property);
       const parts = property.split(":");
