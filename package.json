@@ -1,0 +1,26 @@
+{
+  "name": "loadsmart-github-actions",
+  "version": "1.0.0",
+  "description": "Set of custom GitHub actions used by Loadsmart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loadsmart/github-actions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loadsmart/github-actions/issues"
+  },
+  "homepage": "https://github.com/loadsmart/github-actions#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1",
+    "@octokit/action": "^2.3.2",
+    "@slack/webhook": "^5.0.3"
+  }
+}
