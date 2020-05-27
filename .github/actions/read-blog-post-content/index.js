@@ -33,29 +33,25 @@ async function run() {
 
     const fileResponse = await octokit.request(possiblePostFiles[0].raw_url);
     const content = fileResponse.data;
-    console.log("content:\n", content, "\n\n\n");
-    const matches = content.match("---[\\w\\W\\s]+---");
-    console.log("matches: \n", matches[0]);
 
-    const header = matches[0].replace(/---/g, "").trim();
-    console.info("header:\n", header, "\n\n\n");
-    const properties = header.split("\n");
+    const header = content
+      .match("---[\\w\\W\\s]+---")[0]
+      .replace(/---/g, "")
+      .trim();
 
-    console.log("properties: ", properties);
-
-    const metadata = properties.reduce((acc, property) => {
-      console.info("prop: ", property);
+    const metadata = header.split("\n").reduce((acc, property) => {
       const parts = property.split(":");
       const key = parts[0];
       const value = parts[1];
-      acc[key] = value;
+      acc[key] = value.trim();
       return acc;
     }, {});
-    console.info("metadata", metadata);
 
-    const body = content.replace(header, "");
+    console.info("metadata:\n", metadata);
 
-    console.info("Blog post found:", body);
+    const body = content.replace(header, "").trim();
+
+    console.info("Blog post found:\n", body);
 
     core.setOutput("title", metadata.title);
     core.setOutput("author", metadata.author);
