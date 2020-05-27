@@ -1,0 +1,10 @@
+name: Notify of new blog post to review
+description: Send notification on Slack when there's a new blog post proposal
+inputs:
+  - title
+  - author
+  - date
+  - body
+runs:
+  using: node12
+  main: index.js
