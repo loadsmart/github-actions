@@ -1,10 +1,18 @@
 name: Notify of new blog post to review
 description: Send notification on Slack when there's a new blog post proposal
 inputs:
-  - title
-  - author
-  - date
-  - body
+  title:
+    description: Title of the post
+    required: true
+  author:
+    description: Who wrote the post
+    required: true
+  date:
+    description: Expected date of publish
+    required: true
+  body:
+    description: The content of the post itself
+    required: true
 runs:
   using: node12
   main: index.js
