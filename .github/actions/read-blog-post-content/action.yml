@@ -1,10 +1,14 @@
 name: Read blog post content
 description: Reads the content of a blog post in a PR
 outputs:
-  - title
-  - author
-  - date
-  - body
+  title:
+    description: Title of the blog post
+  author:
+    description: Author of the blog post
+  date:
+    description: Expected date this post will be published
+  body:
+    description: Content of  the blog post
 runs:
   using: node12
   main: index.js

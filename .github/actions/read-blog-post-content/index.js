@@ -34,18 +34,19 @@ async function run() {
     const fileResponse = await octokit.request(possiblePostFiles[0].raw_url);
     const content = fileResponse.data;
 
-    const header = content
-      .match("---[\\w\\W\\s]+---")[0]
-      .replace(/---/g, "")
-      .trim();
+    const header = content.match("---[\\w\\W\\s]+---")[0];
 
-    const metadata = header.split("\n").reduce((acc, property) => {
-      const parts = property.split(":");
-      const key = parts[0];
-      const value = parts[1];
-      acc[key] = value.trim();
-      return acc;
-    }, {});
+    const metadata = header
+      .replace(/---/g, "")
+      .trim()
+      .split("\n")
+      .reduce((acc, property) => {
+        const parts = property.split(":");
+        const key = parts[0];
+        const value = parts[1];
+        acc[key] = value.trim();
+        return acc;
+      }, {});
 
     console.info("metadata:\n", metadata);
 
@@ -56,7 +57,7 @@ async function run() {
     core.setOutput("title", metadata.title);
     core.setOutput("author", metadata.author);
     core.setOutput("date", metadata.date);
-    core.setOutput("body", content);
+    core.setOutput("body", body);
   } catch (error) {
     core.setFailed(error.message);
   }
