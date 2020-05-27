@@ -35,7 +35,6 @@ async function run() {
     const content = fileResponse.data;
     console.log("content:\n", content, "\n\n\n");
     const matches = content.match("---[\\w\\W\\s]+---");
-
     console.log("matches: \n", matches[0]);
 
     const header = matches[0].replace(/---/g, "").trim();
