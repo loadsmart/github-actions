@@ -44,7 +44,7 @@ const buildNotification = ({ title, date, author, body, pr }) => ({
       type: "section",
       text: {
         type: "mrkdwn",
-        text: body.slice(0, 150) + "...",
+        text: body.slice(0, 250) + "...",
       },
     },
     {

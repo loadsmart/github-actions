@@ -56,7 +56,7 @@ async function run() {
 
     core.setOutput("title", metadata.title);
     core.setOutput("author", metadata.author);
-    core.setOutput("date", metadata.date);
+    core.setOutput("date", metadata.date.replace(/"/g, ""));
     core.setOutput("body", body);
   } catch (error) {
     core.setFailed(error.message);
