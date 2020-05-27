@@ -10,7 +10,8 @@ const buildNotification = ({ title, date, author, body, pr }) => ({
       text: {
         type: "plain_text",
         emoji: true,
-        text: text,
+        text:
+          "Hello, everyone! :wave:\n There's a new post for you to review. Would you help us out? :tada:",
       },
     },
     {
