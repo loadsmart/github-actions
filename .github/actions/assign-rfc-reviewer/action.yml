@@ -1,0 +1,8 @@
+name: 'Assign RFC Reviewers'
+description: 'Assigns Github teams to review RFC's based on keywords file'
+inputs:
+  keywords-file:
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'
