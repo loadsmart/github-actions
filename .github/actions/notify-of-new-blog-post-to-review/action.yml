@@ -14,5 +14,5 @@ inputs:
     description: The content of the post itself
     required: true
 runs:
-  using: node12
+  using: node16
   main: index.js
