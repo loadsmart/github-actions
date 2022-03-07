@@ -27,10 +27,12 @@ async function getRFCFile() {
   const rstFile = filesResponse.data.find((file) =>
     file.filename.endsWith(".rst")
   );
-  return rstFile.patch.toLowerCase();
+  return rstFile && rstFile.patch.toLowerCase();
 }
 
 async function lookForKeywords(keywords, rfcFileContent) {
+  if (!rfcFileContent) return;
+
   const octokit = new Octokit();
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   const pull_number = github.context.payload.pull_request.number;
