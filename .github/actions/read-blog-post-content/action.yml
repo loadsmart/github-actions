@@ -10,5 +10,5 @@ outputs:
   body:
     description: Content of  the blog post
 runs:
-  using: node12
+  using: node16
   main: index.js
