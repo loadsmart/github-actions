@@ -1,6 +1,12 @@
 name: 'Assign RFC Reviewers'
 description: 'Assigns Github teams to review RFCs based on keywords file'
 inputs:
+  git-hub-app-id:
+    required: true
+  git-hub-app-installation-id:
+    required: true
+  git-hub-app-private-key:
+    required: true
   keywords-file:
     required: true
 runs:

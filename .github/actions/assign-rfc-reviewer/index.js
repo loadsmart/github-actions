@@ -4,14 +4,29 @@ const github = require("@actions/github");
 const yaml = require("js-yaml");
 
 const { Octokit } = require("@octokit/action");
+const { createAppAuth } = require("@octokit/auth-app");
+
+function createOctokit() {
+  const privateKeyBase64 = core.getInput("git-hub-app-private-key");
+  const buff = Buffer.from(privateKeyBase64, "base64");
+  const privateKey = buff.toString("utf-8");
+
+  return new Octokit({
+    authStrategy: createAppAuth,
+    auth: {
+      appId: core.getInput("git-hub-app-id"),
+      privateKey,
+      installationId: core.getInput("git-hub-app-installation-id"),
+    },
+  });
+}
 
 function getKeywords() {
   const keywordsFileName = core.getInput("keywords-file");
   return yaml.load(fs.readFileSync(keywordsFileName, "utf8"));
 }
 
-async function getRFCFile() {
-  const octokit = new Octokit();
+async function getRFCFile(octokit) {
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   const pull_number = github.context.payload.pull_request.number;
 
@@ -30,10 +45,9 @@ async function getRFCFile() {
   return rstFile && rstFile.patch.toLowerCase();
 }
 
-async function lookForKeywords(keywords, rfcFileContent) {
+async function lookForKeywords(octokit, keywords, rfcFileContent) {
   if (!rfcFileContent) return;
 
-  const octokit = new Octokit();
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   const pull_number = github.context.payload.pull_request.number;
 
@@ -58,9 +72,10 @@ async function lookForKeywords(keywords, rfcFileContent) {
 
 async function run() {
   try {
+    const octokit = createOctokit();
     const keywords = getKeywords();
-    const rfcFileContent = await getRFCFile();
-    await lookForKeywords(keywords, rfcFileContent);
+    const rfcFileContent = await getRFCFile(octokit);
+    await lookForKeywords(octokit, keywords, rfcFileContent);
   } catch (error) {
     core.setFailed(error.message);
   }
