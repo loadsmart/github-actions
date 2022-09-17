@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: github-actions
+  description: loadsmart github actions
+  annotations:
+    github.com/project-slug: loadsmart/github-actions
+  tags:
+    - javascript
+spec:
+  type: other
+  lifecycle: production
+  owner: developer-productivity
