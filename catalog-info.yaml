@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: github-actions
-  description: github-actions project repository
+  description: loadsmart github actions
   annotations:
     github.com/project-slug: loadsmart/github-actions
   tags:
@@ -10,4 +10,4 @@ metadata:
 spec:
   type: other
   lifecycle: production
-  owner: <CODE-OWNER>
+  owner: developer-productivity
