@@ -6,7 +6,7 @@ The keywords should be defined in a file in the following format. This action ex
 
 ```yaml
 teams:
-  - github_slug: load-management
+  - github_slug: top-gear
     keywords:
       - tracking
       - tasks
