@@ -5,7 +5,7 @@ metadata:
   description: loadsmart github actions
   annotations:
     github.com/project-slug: loadsmart/github-actions
-    opslevel.com/tier: tier_4
+    opslevel.com/tier: tier_3
   tags:
     - javascript
 spec:
