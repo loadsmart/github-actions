@@ -51,7 +51,19 @@ async function lookForKeywords(octokit, keywords, rfcFileContent) {
   const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
   const pull_number = github.context.payload.pull_request.number;
 
+  const currentReviewersResponse = await octokit.request(
+    "GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers",
+    {
+      owner,
+      repo,
+      pull_number,
+    }
+  );
+  const currentTeamReviewerSlugs = currentReviewersResponse.data.teams.map((t) => t.slug)
+
   keywords.teams.forEach(async (team) => {
+    if (currentTeamReviewerSlugs.includes(team.slug)) return;
+
     const keywordFound = team.keywords.some(
       (keyword) => rfcFileContent.indexOf(keyword) > -1
     );
